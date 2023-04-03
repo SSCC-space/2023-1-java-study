@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+public class JavaStudyWeek2Test {
+    public static void main(String[] args) {
+        //Q.1 평균점수 구하기
+        int 국어 = 80;
+        int 영어 = 75;
+        int 수학 = 55;
+        double 평균 = 0;
+        평균 = (국어 + 영어 + 수학) / 3;
+        System.out.println("평균은 : " + 평균);
+        //Q.3 주민등록번호 나누기
+        String a = "881120-1068234";
+        System.out.print("생년월일 : 19" + a.substring(0, 6));
+        System.out.println(", 뒷 주민등록번호 : " + a.substring(7, 14));
+        //Q.5 문자열 바꾸기(질문 있습니당)
+        String b = "a:b:c:d";
+        System.out.println(b.replaceAll (":","#")); // 질문: replace를 하든 replaceALL을 하든 결과 값은 같은데 차이가 없는건가요?
+        //Q.7 리스트를 문자열로 만들기
+        ArrayList<String> myList = new ArrayList<>(Arrays.asList("Life", "is", "too", "short"));
+        String result = String.join(" ", myList);
+        System.out.println(result);
+        //Q.9 중복 숫자 제거하기
+        HashSet<Integer> set = new HashSet<>(Arrays.asList(1,1,1,2,2,3,3,3,4,4,5));
+        System.out.println(set);
+    }
+
+}
