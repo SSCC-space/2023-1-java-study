@@ -30,9 +30,9 @@ public class Main {
     }
     public void fifth(){
         ArrayList<Integer> numbers=new ArrayList<>(Arrays.asList(1,1,1,2,2,3,3,3,4,4,5));
-        HashSet<Integer> num=new HashSet<Integer>(numbers);
-        ArrayList<Integer> NewList = new ArrayList<Integer>(num);
-        System.out.println(num);
+        HashSet<Integer> num=new HashSet<>(numbers);
+        ArrayList<Integer> NewList = new ArrayList<>(num);
+        System.out.println(NewList);
     }
 
     public static void main (String[]args) {
