@@ -7,7 +7,6 @@ public class Car {
         this.name = name;
         this.speed = speed;
     }
-
     public String getName(){
         return this.name;
     }
