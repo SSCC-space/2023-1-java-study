@@ -1,12 +1,11 @@
 import java.util.Random;
 
-public class SuperCar extends Car{
+public class SuperCar extends Car {
 
-    private int score;
-    private int boost;
+    private int boost = 0;
 
-    SuperCar(String name , int speed ){
-        super(name , speed);
+    SuperCar(String name, int speed) {
+        super(name, speed);
     }
 
     @Override
@@ -14,22 +13,20 @@ public class SuperCar extends Car{
         Random r = new Random();
         Random isboost = new Random();
 
-        for (int t = 0; t < time ; t++){
-            if ( r.nextBoolean() ) {
-                if ( isboost.nextBoolean() ) {
+        for (int t = 0; t < time; t++) {
+            if (r.nextBoolean()) {
+                if (isboost.nextBoolean()) {
                     this.boost += 1;
                     this.score += this.getSpeed() * 2;
-                }
-                else
+                } else
                     this.score += this.getSpeed();
             }
         }
-        System.out.println(this.getName() + " " + this.score + " boost = " + this.boost);
-//        return this.score;
     }
 
-    public int sayScore(){
-        return this.score;
+
+    public void sayScore() {
+        System.out.println("차 이름:" + this.getName() + " 달린거리 : " + this.score + " boost = " + this.boost);
     }
 
 

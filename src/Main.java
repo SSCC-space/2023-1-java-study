@@ -26,11 +26,10 @@ public class Main {
             // 슈퍼가 인지 물어보기
             System.out.println("슈퍼카인가요? Y = 1 , N = 0");
             int isSuper = input.nextInt();
-            if (isSuper == 1){
-                cars[i] = new SuperCar(name , speed);
+            if (isSuper == 1) {
+                cars[i] = new SuperCar(name, speed);
                 System.out.println("슈퍼카가 생성되었습니다");
-            }
-            else
+            } else
                 cars[i] = new Car(name, speed);
         }
 
@@ -46,7 +45,7 @@ public class Main {
         int time = input.nextInt(); // 25 가정
 
         System.out.println("---최종 결과 발표---");
-        for (Car car : cars){
+        for (Car car : cars) {
             car.go(time);
         }
         // 슈퍼카 부분 결과 발표 //
