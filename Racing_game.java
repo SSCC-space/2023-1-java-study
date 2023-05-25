@@ -1,42 +1,76 @@
+package JAVAstudy.hw;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Racing_game {
+class Car {
+    String name;
+    int speed;
+    int score = 0;
 
-    public static class Car {
-        String name;
-        int speed;
-        int score;
+    long seed = System.currentTimeMillis();
+    Random random = new Random(seed);
 
-        Car(String name, int speed) {
-            this.name = name;
-            this.speed = speed;
-        }
-
-        void setScore(int score) {
-            this.score = score;
-        }
-
-        int getSpeed() {
-            return speed;
-        }
-
-        int getScore() {
-            return score;
-        }
-
-        void printInfo() {
-            System.out.println("자동차의 이름은 " + name + ", 자동차의 속도는 " + speed);
-        }
-
+    Car(String name, int speed) {
+        this.name = name;
+        this.speed = speed;
     }
+
+    void setScore(int score) {
+        this.score = score;
+    }
+
+    int getSpeed() {
+        return speed;
+    }
+
+    int getScore() {
+        return score;
+    }
+
+    void sayScore() {
+        System.out.println("score: " + score);
+    }
+
+    void printInfo() {
+        System.out.println("스피드는 " + speed + "이고, 이름은 " + name + "입니다.");
+    }
+
+    void go() {
+        if (random.nextInt(2) == 1) {
+            score += speed;
+        }
+    }
+}
+
+class SuperCar extends Car {
+
+    int boost = 0;
+
+    SuperCar(String name, int speed) {
+        super(name, speed);
+    }
+
+    void go() {
+        if (random.nextInt(2) == 1) {
+            score += speed;
+            if (random.nextInt(2) == 1) {
+                score += speed;
+                boost += 1;
+            }
+        }
+    }
+
+    void sayScore() {
+        System.out.println("score: " + score + ", booster: " + boost);
+    }
+}
+
+public class RacingGame {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        long seed = System.currentTimeMillis();
-        Random random = new Random(seed);
 
         System.out.println("자동차의 갯수를 입력하세요.");
         int n = scanner.nextInt();
@@ -45,13 +79,20 @@ public class Racing_game {
 
         for (int i = 0; i < n; i++) {
             scanner.nextLine();
+            System.out.println((i + 1) + "번 째 자동차의 스피드를 입력하세요.");
+            int speed = scanner.nextInt();
+            scanner.nextLine();
             System.out.println((i + 1) + "번 째 자동차의 이름을 입력하세요.");
             String name = scanner.nextLine();
-            System.out.println((i + 1) + "번 째 자동차의 속도를 입력하세요.");
-            int speed = scanner.nextInt();
-
-            Car car = new Car(name, speed);
-            cars.add(i, car);
+            System.out.println("이 자동차는 슈퍼카인가요? 0 또는 1 입력");
+            int sup = scanner.nextInt();
+            if (sup == 1) {
+                SuperCar car = new SuperCar(name, speed);
+                cars.add(i, car);
+            } else {
+                Car car = new Car(name, speed);
+                cars.add(i, car);
+            }
         }
         System.out.println("\n-----경기 참가자 소개-----");
         for (int i = 0; i < n; i++) {
@@ -61,20 +102,14 @@ public class Racing_game {
         System.out.println("\n경기를 몇 초 동안 진행할까요?");
         int time = scanner.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            int score = 0;
-            int cur_speed = cars.get(i).getSpeed();
+        for (Car car : cars) {
             for (int j = 0; j < time; j++) {
-                if (random.nextInt(2) == 1)
-                    score += cur_speed;
+                car.go();
             }
-            cars.get(i).setScore(score);
         }
-
         System.out.println("\n---최종 결과 발표---");
-        for (int i = 0; i < n; i++) {
-            System.out.println(cars.get(i).getScore());
+        for (Car car : cars) {
+            car.sayScore();
         }
     }
 }
-
